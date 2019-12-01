@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class Ground : MonoBehaviour
+public class BackGround : MonoBehaviour
 {
     [Header("速度"), Range(0, 100.5f)]
-    public float speed = 3f;
+    public float speed = 0.05f;
 
     [Header("移動")]
     public Transform tran;
