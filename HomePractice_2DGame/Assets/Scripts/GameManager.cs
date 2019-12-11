@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;  // 引用 介面API
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class GameManager : MonoBehaviour
     public int TopScore;
     [Header("水管")]
     public GameObject pipe; // GameObject 可以存放預製物以及場景上的物件
+    [Header("介面群組")]
+    public GameObject goUI;
+    [Header("分數介面")]
+    public Text textScore;
+    public Text textTop;
+
 
     /// <summary>
     /// 生成水管功能
@@ -33,7 +40,11 @@ public class GameManager : MonoBehaviour
    /// <param name="add">分數</param>
     public void AddScore(int add)
     {
+        Score = Score + add;
+        textScore.text = Score + "";
+        // textScore.text = Score.ToString();
 
+        SetTopScore();
     }
 
     /// <summary>
@@ -41,7 +52,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void SetTopScore()
     {
+        if (Score > TopScore)
+        {
+            TopScore = Score;
 
+            PlayerPrefs.SetInt("最高分數", TopScore);
+        }
+        textTop.text = TopScore.ToString();
     }
 
     /// <summary>
@@ -49,7 +66,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameOver()
     {
-
+        goUI.SetActive(true);
+        Ground.speed = 0;
     }
 
     private void Start()
@@ -57,5 +75,8 @@ public class GameManager : MonoBehaviour
         //SpawnPipe();
 
         InvokeRepeating("SpawnPipe", 0, 140f * Time.deltaTime);
+
+        TopScore = PlayerPrefs.GetInt("最高分數");
+        textTop.text = TopScore.ToString();
     }
 }
