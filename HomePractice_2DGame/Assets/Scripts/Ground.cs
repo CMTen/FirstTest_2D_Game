@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Ground : MonoBehaviour
 {
@@ -22,5 +23,10 @@ public class Ground : MonoBehaviour
     private void Update()
     {
         Move();
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            //speed = speed + 2;
+        }
     }
 }

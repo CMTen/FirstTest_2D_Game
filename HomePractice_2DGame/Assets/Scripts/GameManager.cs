@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;  // 引用 介面API
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,6 +71,16 @@ public class GameManager : MonoBehaviour
         Ground.speed = 0;
     }
 
+    public void Replay()
+    {
+        SceneManager.LoadScene("遊戲場景");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
     private void Start()
     {
         //SpawnPipe();
@@ -78,5 +89,7 @@ public class GameManager : MonoBehaviour
 
         TopScore = PlayerPrefs.GetInt("最高分數");
         textTop.text = TopScore.ToString();
+
+        Ground.speed = 3f;
     }
 }

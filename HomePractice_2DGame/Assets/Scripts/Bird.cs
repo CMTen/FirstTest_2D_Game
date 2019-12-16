@@ -69,9 +69,22 @@ public class Bird : MonoBehaviour
         gm.AddScore(1);
     }
 
+    private void Start()
+    {
+        Screen.SetResolution(720, 1280, false);
+    }
+
     private void Update()
     {
         Jump();
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            r2d.gravityScale = 0f;
+            r2d.SetRotation(0f * r2d.velocity.y);
+            r2d.AddForce(new Vector2(0, -jump));
+            r2d.Sleep();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
